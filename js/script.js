@@ -9,7 +9,7 @@ const modalClose = document.getElementById('modalClose');
 const factText = document.getElementById('spaceFact');
 
 // Use DEMO_KEY for now. Replace this with your own NASA API key later.
-const apiKey = 'DEMO_KEY';
+const apiKey = 'qlu6csrn6qOZVCtvasuwIUP9ZnGItkS9emN0F5p4';
 
 // A small array of fun space facts shown on page load.
 const spaceFacts = [
@@ -48,7 +48,12 @@ function createCard(item) {
 
   const mediaType = item.media_type === 'video' ? 'Video' : 'Image';
   const mediaHTML = item.media_type === 'video'
-    ? `<iframe src="${item.url}" title="${item.title}"></iframe>`
+    ? `<div style="height: 220px; display: flex; align-items: center; justify-content: center; border: 1px dashed #475569; border-radius: 6px; background: rgba(15, 23, 42, 0.7); color: #f8fafc; text-align: center; padding: 20px;">
+        <div>
+          <div style="font-size: 48px; margin-bottom: 10px;">🎬</div>
+          <p style="margin: 0;">NASA Video</p>
+        </div>
+      </div>`
     : `<img src="${item.url}" alt="${item.title}" />`;
 
   card.innerHTML = `
@@ -68,7 +73,17 @@ function openModal(item) {
   let mediaContent = '';
 
   if (mediaType === 'video') {
-    mediaContent = `<iframe class="modal-media" src="${item.url}" title="${item.title}"></iframe>`;
+    mediaContent = `
+      <div style="padding: 20px; border: 1px dashed #475569; border-radius: 8px; background: rgba(15, 23, 42, 0.7); text-align: center; margin-bottom: 14px;">
+        <div style="font-size: 48px; margin-bottom: 10px;">🎬</div>
+        <p style="color: #cbd5e1; line-height: 1.5; margin-bottom: 12px;">
+          NASA does not allow some videos to be embedded in this app.
+        </p>
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #2563eb; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none;">
+          Watch Video
+        </a>
+      </div>
+    `;
   } else {
     mediaContent = `<img class="modal-media" src="${item.url}" alt="${item.title}" />`;
   }
